@@ -97,6 +97,12 @@
 		<Unit filename="E:/a-component/a-key-open/key_open/Core/Inc/gpio.h">
 			<Option target="key_open.elf"/>
 		</Unit>
+		<Unit filename="E:/a-component/a-key-open/key_open/Core/Inc/key_open.c">
+			<Option target="key_open.elf"/>
+		</Unit>
+		<Unit filename="E:/a-component/a-key-open/key_open/Core/Inc/key_open.h">
+			<Option target="key_open.elf"/>
+		</Unit>
 		<Unit filename="E:/a-component/a-key-open/key_open/Core/Inc/main.h">
 			<Option target="key_open.elf"/>
 		</Unit>

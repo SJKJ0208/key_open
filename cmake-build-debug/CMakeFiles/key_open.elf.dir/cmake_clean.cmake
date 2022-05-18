@@ -1,4 +1,5 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/key_open.elf.dir/Core/Inc/key_open.c.obj"
   "CMakeFiles/key_open.elf.dir/Core/Src/gpio.c.obj"
   "CMakeFiles/key_open.elf.dir/Core/Src/main.c.obj"
   "CMakeFiles/key_open.elf.dir/Core/Src/stm32f1xx_hal_msp.c.obj"

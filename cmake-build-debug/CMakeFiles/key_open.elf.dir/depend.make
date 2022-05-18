@@ -3,6 +3,9 @@
 
 CMakeFiles/key_open.elf.dir/startup/startup_stm32f103xb.s.obj: \
  ../startup/startup_stm32f103xb.s
+CMakeFiles/key_open.elf.dir/Core/Inc/key_open.c.obj: \
+ ../Core/Inc/key_open.c \
+ ../Core/Inc/key_open.h
 CMakeFiles/key_open.elf.dir/Core/Src/gpio.c.obj: \
  ../Core/Inc/gpio.h \
  ../Core/Inc/main.h \

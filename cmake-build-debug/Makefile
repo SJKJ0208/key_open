@@ -128,6 +128,30 @@ key_open.elf/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\key_open.elf.dir\build.make CMakeFiles/key_open.elf.dir/build
 .PHONY : key_open.elf/fast
 
+Core/Inc/key_open.obj: Core/Inc/key_open.c.obj
+.PHONY : Core/Inc/key_open.obj
+
+# target to build an object file
+Core/Inc/key_open.c.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\key_open.elf.dir\build.make CMakeFiles/key_open.elf.dir/Core/Inc/key_open.c.obj
+.PHONY : Core/Inc/key_open.c.obj
+
+Core/Inc/key_open.i: Core/Inc/key_open.c.i
+.PHONY : Core/Inc/key_open.i
+
+# target to preprocess a source file
+Core/Inc/key_open.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\key_open.elf.dir\build.make CMakeFiles/key_open.elf.dir/Core/Inc/key_open.c.i
+.PHONY : Core/Inc/key_open.c.i
+
+Core/Inc/key_open.s: Core/Inc/key_open.c.s
+.PHONY : Core/Inc/key_open.s
+
+# target to generate assembly for a file
+Core/Inc/key_open.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\key_open.elf.dir\build.make CMakeFiles/key_open.elf.dir/Core/Inc/key_open.c.s
+.PHONY : Core/Inc/key_open.c.s
+
 Core/Src/gpio.obj: Core/Src/gpio.c.obj
 .PHONY : Core/Src/gpio.obj
 
@@ -601,6 +625,9 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... key_open.elf
+	@echo ... Core/Inc/key_open.obj
+	@echo ... Core/Inc/key_open.i
+	@echo ... Core/Inc/key_open.s
 	@echo ... Core/Src/gpio.obj
 	@echo ... Core/Src/gpio.i
 	@echo ... Core/Src/gpio.s

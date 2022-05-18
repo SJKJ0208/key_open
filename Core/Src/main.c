@@ -54,6 +54,104 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+void StandbyMode_Measure(void)
+{
+
+    /* Enable Power Clock*/
+    __HAL_RCC_PWR_CLK_ENABLE();
+
+    /* Allow access to Backup */
+    HAL_PWR_EnableBkUpAccess();
+
+    /* Reset RTC Domain */
+    __HAL_RCC_BACKUPRESET_FORCE();
+    __HAL_RCC_BACKUPRESET_RELEASE();
+
+    /* Disable all used wakeup sources: Pin1(PA.0) */
+    HAL_PWR_DisableWakeUpPin(PWR_WAKEUP_PIN1);
+
+    /* Clear all related wakeup flags */
+    __HAL_PWR_CLEAR_FLAG(PWR_FLAG_WU);
+
+    /* Re-enable all used wakeup sources: Pin1(PA.0) */
+    HAL_PWR_EnableWakeUpPin(PWR_WAKEUP_PIN1);
+
+    /*## Enter Standby Mode ####################################################*/
+    /* Request to enter STANDBY mode  */
+    HAL_PWR_EnterSTANDBYMode();
+
+}
+void Sys_Enter_Standby(void)
+{
+    //关闭所有外设(根据实际情况写)
+    __HAL_RCC_APB2_FORCE_RESET();
+    //  __HAL_RCC_GPIOC_CLK_DISABLE();
+    //__HAL_RCC_GPIOD_CLK_DISABLE();
+    //__HAL_RCC_GPIOA_CLK_DISABLE();
+    //__HAL_RCC_GPIOB_CLK_DISABLE();
+    StandbyMode_Measure();//进入待机模式
+}
+
+uint8_t PWR_Check_Standby(void)
+{
+    uint8_t press_cnt =0;//记录按下的次数
+    uint8_t release_cnt =0;//记录松开的次数
+
+    HAL_GPIO_WritePin(OPEN_GPIO_Port, OPEN_Pin, GPIO_PIN_RESET);
+    while(1)//死循环，由return结束
+    {
+        HAL_Delay(20);//延迟一段时间再检测
+
+
+        if(HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_0) == GPIO_PIN_SET)    //检测到按下按键
+        {
+            press_cnt++;//记录按下次数
+            release_cnt=0;//清除按键释放记录
+            if(press_cnt>=100)//按下时间足够
+            {
+                HAL_GPIO_WritePin(OPEN_GPIO_Port, OPEN_Pin, GPIO_PIN_SET);
+                //printf("系统进入待机模式，按下WKUP可退出待机模式\n");
+                return 1;//检测到按键被时间长按下
+            }
+        }
+        else
+        {
+            release_cnt++;//记录释放次数
+            if(release_cnt>5)//连续检测到释放超过5次
+            {
+                HAL_GPIO_WritePin(OPEN_GPIO_Port, OPEN_Pin, GPIO_PIN_RESET);
+                return 0;//按下时间太短，不是按键长按操作
+            }
+        }
+    }
+
+}
+void WKUP_Init(void)
+{
+    GPIO_InitTypeDef GPIO_InitStruct;
+
+    /* GPIO Ports Clock Enable */
+    __HAL_RCC_GPIOA_CLK_ENABLE();
+
+    /*Configure GPIO pin : PA0 */
+    GPIO_InitStruct.Pin = GPIO_PIN_0;
+    GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+    GPIO_InitStruct.Pull = GPIO_PULLDOWN;
+    HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+
+    //检查是否是正常开机
+    if(PWR_Check_Standby()==0)
+    {
+        Sys_Enter_Standby();//不是开机，进入待机模式
+    }
+
+    /* EXTI interrupt init*/
+    HAL_NVIC_SetPriority(EXTI0_IRQn, 2, 2);
+    HAL_NVIC_EnableIRQ(EXTI0_IRQn);
+
+}
+
 
 
 /* USER CODE END 0 */
@@ -87,7 +185,7 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
-
+  WKUP_Init();
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -95,9 +193,8 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-      HAL_Delay(200);
-      HAL_GPIO_TogglePin(B_GPIO_Port,B_Pin);
-      HAL_Delay(200);
+      HAL_GPIO_TogglePin(R_GPIO_Port, R_Pin);
+      HAL_Delay(250);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

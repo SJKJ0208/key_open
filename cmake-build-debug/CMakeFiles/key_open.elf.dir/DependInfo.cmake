@@ -28,6 +28,7 @@ set(CMAKE_ASM_TARGET_INCLUDE_PATH
   "../Drivers/CMSIS/Include"
   )
 set(CMAKE_DEPENDS_CHECK_C
+  "E:/a-component/a-key-open/key_open/Core/Inc/key_open.c" "E:/a-component/a-key-open/key_open/cmake-build-debug/CMakeFiles/key_open.elf.dir/Core/Inc/key_open.c.obj"
   "E:/a-component/a-key-open/key_open/Core/Src/gpio.c" "E:/a-component/a-key-open/key_open/cmake-build-debug/CMakeFiles/key_open.elf.dir/Core/Src/gpio.c.obj"
   "E:/a-component/a-key-open/key_open/Core/Src/main.c" "E:/a-component/a-key-open/key_open/cmake-build-debug/CMakeFiles/key_open.elf.dir/Core/Src/main.c.obj"
   "E:/a-component/a-key-open/key_open/Core/Src/stm32f1xx_hal_msp.c" "E:/a-component/a-key-open/key_open/cmake-build-debug/CMakeFiles/key_open.elf.dir/Core/Src/stm32f1xx_hal_msp.c.obj"
