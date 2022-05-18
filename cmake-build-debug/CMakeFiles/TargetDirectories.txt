@@ -1,0 +1,3 @@
+E:/a-component/a-key-open/key_open/cmake-build-debug/CMakeFiles/key_open.elf.dir
+E:/a-component/a-key-open/key_open/cmake-build-debug/CMakeFiles/edit_cache.dir
+E:/a-component/a-key-open/key_open/cmake-build-debug/CMakeFiles/rebuild_cache.dir
